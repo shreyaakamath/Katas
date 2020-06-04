@@ -1,10 +1,10 @@
 # Code Katas 
 
 **Objective**: 
-Catalog my journey into effortful daily code katas.
+Catalog my journey into effortful daily skill katas.
 
 **Key Result**: 
-* daily commit of a code kata (volume matters here. simple commit is alright)
+* daily commit of a skill kata (volume matters here. simple commit is alright)
 * katas outside your comfort zone every tk  
 
 **Quotes:**
