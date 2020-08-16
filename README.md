@@ -1,4 +1,3 @@
-# Code Katas 
 
 **Objective**: 
 Catalog my journey into effortful daily skill katas.
