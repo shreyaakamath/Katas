@@ -1,1 +1,1 @@
-![image-20200816143523132](C:\Users\shrey\AppData\Roaming\Typora\typora-user-images\image-20200816143523132.png)
+![image-20200816144546067](images/coursera-deep-learning/image-20200816144546067.png)
