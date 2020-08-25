@@ -1,4 +1,4 @@
-# Week 1 
+# Week 1
 
 ## 1.1 What is a neural network ? 
 
@@ -86,11 +86,18 @@ Logistic regression = algo for binary classification.
 When to use ? Output label in supervised learning is zero or one. 
 
 * Given X, want y^ = P( y = 1| x) , Parameters w , b 
+
 * Linear regression y = wT * x + b 
+
   * this can be greater than 1 or negative. doesnt make sense for prob. 
+
   * so we use sigmoid (s shaped curve). Sigmoid(z) = 1 / (1+ e^-z)
+
   * If z large then sigmoid = 1 / 1+0 = 1 If z large neg then sigmoid = 1/ 1+ big_num = 0 
-  * Not using the notation shown on the right wherein b,w are in the same matrix. ![img](images/coursera-deep-learning/rElVU48hcOMpAaVIvug4aTXa-wQGKwQj6ZOmSDo7rmyEW4KLQIF-fEnp0CZbAgals-NNInj0Todj_lp4xp6AhOCCPpkt5uygzfVhtqk6lJy5AVu0XNNp7wVxmHZmPZeZ9fyy9HwH
+
+  * Not using the notation shown on the right wherein b,w are in the same matrix.
+
+    ![img](images/coursera-deep-learning/rElVU48hcOMpAaVIvug4aTXa-wQGKwQj6ZOmSDo7rmyEW4KLQIF-fEnp0CZbAgals-NNInj0Todj_lp4xp6AhOCCPpkt5uygzfVhtqk6lJy5AVu0XNNp7wVxmHZmPZeZ9fyy9HwH
 
 ### 2.1.3 Logistic Regression cost function 
 
@@ -214,12 +221,180 @@ Get derivative wrt to one training sample and average that for all
 
 ### 2.2.1 Intro 
 
+SIMD - single instruction multiple data. Applicable for CPU, GPU
+
+### 2.2.2 More Vectorization Examples![img](images/coursera-deep-learning/uxkfsQNt8nkr6Vzn0vhsOKF7OnVoUnAc7llpaaOFqn2pbvwA2ZxhExgckeR7sl5qk2WqQFaZTu1KZnz_5Pr_TzWAxW4bXzRiaLX4E6ECyrGVMCkMOAVedv2DNIn8TWmFaEAZC9Du)![img](images/coursera-deep-learning/w0Xw7Qdce_kZ5Lv6qI4u2YLeo2B3l_IeLZ7DauEz6acztAZIi_QksZ_sOuJWyoGKUwXeV57ocgBRfH03B_YiAhdus5uG5RIMPIluT6O1XeRlcnrpNLgd9T12Wh4E1aVpxgYTzR10)
+In the logistic regression algo instead of having a for loop to calculate the w1, w2 … we can use a numpy vector 
+
+* get rid of dw1, dw2 ... dw = np.zeroes(nx-1)
+* remove the individual weight updates ... dw += x.dz
+* remove the averaging at the end of the loop ... dw = dw/m 
+
+![img](images/coursera-deep-learning/vh2xc7L1TNDAN6Qz1gcx3bJKWvStjXRaw3n5OaRHcBR69RZyoX1dyhRonykm7C4COvXQEQstwGpd8pKOxGapi-p7Kbo1wdD7XIVc9dDp6ZKIwsktA7bsrAIB8n428IGPK8wtU5kU)
 
 
-More Vectorization Examples![img](images/coursera-deep-learning/uxkfsQNt8nkr6Vzn0vhsOKF7OnVoUnAc7llpaaOFqn2pbvwA2ZxhExgckeR7sl5qk2WqQFaZTu1KZnz_5Pr_TzWAxW4bXzRiaLX4E6ECyrGVMCkMOAVedv2DNIn8TWmFaEAZC9Du)![img](images/coursera-deep-learning/w0Xw7Qdce_kZ5Lv6qI4u2YLeo2B3l_IeLZ7DauEz6acztAZIi_QksZ_sOuJWyoGKUwXeV57ocgBRfH03B_YiAhdus5uG5RIMPIluT6O1XeRlcnrpNLgd9T12Wh4E1aVpxgYTzR10)
-In the logistic regression algo instead of having a for loop to calculate the w1, w2 … we can use a numpy vector ![img](images/coursera-deep-learning/vh2xc7L1TNDAN6Qz1gcx3bJKWvStjXRaw3n5OaRHcBR69RZyoX1dyhRonykm7C4COvXQEQstwGpd8pKOxGapi-p7Kbo1wdD7XIVc9dDp6ZKIwsktA7bsrAIB8n428IGPK8wtU5kU)
 
-Vectorizing logistic regressionRemove the for loop iterating over training samples in previous exampleReplacing x1, x2 … with X . Replace z1, z2 … with Z. Then use np.dot(w_tr, X)+bB will be broadcasted to match the correct row/col size
-![img](images/coursera-deep-learning/wtfQ1Pw3YER9Z-97NegT2tRsa2-9cnHjZOfYrInpD7BkCTXyZ9dl9BM1_5d0nVCi6mTYkNXHv9Lj7O9JUaThTnTjrQne24dw9WrGngVx_wpt3HB_nadz0CuoxBT8Ch5XV4BRQ6ZB)
-Vectorizing logistic regression gradient output Calculating the derivative with vectorization ![img](images/coursera-deep-learning/VQovuFilvX0Up5jt07UxlErdMy7N223b9G70b2oH_Gi9Y0XoRq1fuNYExJKAO-3qnNd1B9tfSyzmf9u94UVNqbJsVVNBShhgSsqo10yqfjE-hQ8NGpGVosTvOVxtaTfL7SKe45Y3)![img](images/coursera-deep-learning/ceGUHVPvhjGYNGLFdrCCXJGv_z_eeoLXSxOdUDRZilWf5gDXQv_FFSVuWD3gK8_6KoyQzp4qw4Z32P4aaaw7s75JCdnMxeFb80lluxG5bsCLmcgTJDPAyWzz3vOWIPlQihS23YQB)
-All together with vectorization for single iteration: (multiple iterations would require for loop)![img](images/coursera-deep-learning/KKwq2mZcWtaIqNYVLsnhLH0i0NB_1qd1qWKl2GzmBYtY0sbKw7HdqpUtikUoZQ462ge5OJyMLqY7ZzaKvs8gbTyKYUkXbnlDRt5AFQHNDhSp0zZttoDqVWUhX5BBi_S18x4VtwJE) Broadcasting in python (m,n) matrix + - * / (1,n) ---- make it a (m,n) matrix and apply it to the original matrix. [https://docs.scipy.or g/doc/numpy/user/basics.broadcasting.html](https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html) 
+Now we are left with the outer for loop 
+
+
+
+### 2.2.3 Vectorizing logistic regression 
+
+* Remove the for loop iterating over training samples in previous example
+
+* Replacing x1, x2 … with X . 
+
+* Replace z1, z2 … with Z. 
+
+* Then use np.dot(w_tr, X)+b
+
+* b will be broadcasted to match the correct row/col size
+  ![img](images/coursera-deep-learning/wtfQ1Pw3YER9Z-97NegT2tRsa2-9cnHjZOfYrInpD7BkCTXyZ9dl9BM1_5d0nVCi6mTYkNXHv9Lj7O9JUaThTnTjrQne24dw9WrGngVx_wpt3HB_nadz0CuoxBT8Ch5XV4BRQ6ZB)
+
+  ### 2.2.4 Vectorizing logistic regression gradient output 
+
+  Calculating the derivative with vectorization ![img](images/coursera-deep-learning/VQovuFilvX0Up5jt07UxlErdMy7N223b9G70b2oH_Gi9Y0XoRq1fuNYExJKAO-3qnNd1B9tfSyzmf9u94UVNqbJsVVNBShhgSsqo10yqfjE-hQ8NGpGVosTvOVxtaTfL7SKe45Y3)![img](images/coursera-deep-learning/ceGUHVPvhjGYNGLFdrCCXJGv_z_eeoLXSxOdUDRZilWf5gDXQv_FFSVuWD3gK8_6KoyQzp4qw4Z32P4aaaw7s75JCdnMxeFb80lluxG5bsCLmcgTJDPAyWzz3vOWIPlQihS23YQB)
+  All together with vectorization for single iteration: (multiple iterations would require for loop)![img](images/coursera-deep-learning/KKwq2mZcWtaIqNYVLsnhLH0i0NB_1qd1qWKl2GzmBYtY0sbKw7HdqpUtikUoZQ462ge5OJyMLqY7ZzaKvs8gbTyKYUkXbnlDRt5AFQHNDhSp0zZttoDqVWUhX5BBi_S18x4VtwJE) 
+
+  ### 2.2.4  Broadcasting in python
+
+  ![image-20200825083323049](images/coursera-deep-learning/image-20200825083323049.png)
+
+  no for loops. just two commands.
+
+  
+
+  Another example. automatically create a 4*1 matrix to add 100 to the original matrix 
+
+  ![image-20200825083451887](images/coursera-deep-learning/image-20200825083451887.png)
+
+  
+
+  Another example. 
+
+  ![image-20200825083544793](images/coursera-deep-learning/image-20200825083544793.png)
+
+  
+
+  General principle : 
+
+  *  (m,n) matrix (+ - * /) (1,n) ---- make it a (m,n) matrix and apply it to the original matrix. [https://docs.scipy.or g/doc/numpy/user/basics.broadcasting.html](https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html) 
+  * ![image-20200825083659342](images/coursera-deep-learning/image-20200825083659342.png)
+
+  
+
+### 2.2.5 python/numpy vectors 
+
+a = np.random.randn(5)
+
+a.shape 
+
+(5,) ---> rank 1 array. do NOT use 
+
+a.T ----> same as a! confusing. 
+
+VS
+
+a = np.random.randn(5,1)
+
+a.shape
+
+(5,1) ---->column vector 
+
+
+
+# Week 3 : Shallow neural networks
+
+
+
+## 3.2 Neural network representation 
+
+* hidden === we dont see what the values should be in the training set. 
+
+* The below network is called a "2 layer NN". hidden + output = 2
+
+![image-20200825085602430](images/coursera-deep-learning/image-20200825085602430.png)
+
+## 3.2 Computing a neural networks output 
+
+zoom into one node. 
+
+![image-20200825085809682](images/coursera-deep-learning/image-20200825085809682.png)
+
+notation : <img src="images/coursera-deep-learning/image-20200825085913731.png" alt="image-20200825085913731" style="zoom: 50%;" />
+
+stack the W's, X's and b's to create Z1 
+
+![image-20200825090129171](images/coursera-deep-learning/image-20200825090129171.png)
+
+so summarizing ... 
+
+<img src="images/coursera-deep-learning/image-20200825090232395.png" alt="image-20200825090232395" style="zoom: 33%;" />
+
+## 3.3 Vectorizing across multiple examples 
+
+We need to do the Z,A computation for each layer for each training example. Here is a for loop for computing it (bad!)
+
+<img src="images/coursera-deep-learning/image-20200825090635886.png" alt="image-20200825090635886" style="zoom:33%;" />
+
+<img src="images/coursera-deep-learning/image-20200825090654358.png" alt="image-20200825090654358" style="zoom:50%;" />
+
+stack up x(i) to create X. <img src="images/coursera-deep-learning/image-20200825090837304.png" alt="image-20200825090837304" style="zoom:33%;" />
+
+then re-write Z, A to use X <img src="images/coursera-deep-learning/image-20200825090911167.png" alt="image-20200825090911167" style="zoom:33%;" />
+
+<img src="images/coursera-deep-learning/image-20200825091018680.png" alt="image-20200825091018680" style="zoom:33%;" />
+
+## 3.3.5 Activation functions 
+
+
+
+Sigmoid  <img src="images/coursera-deep-learning/image-20200825091536562.png" alt="image-20200825091536562" style="zoom:33%;" />
+
+Better activation = tanh <img src="images/coursera-deep-learning/image-20200825091612147.png" alt="image-20200825091612147" style="zoom:33%;" />
+
+center the data so the mean of the data is 0. almost never use sigmoid for inner layers. it makes sense for the output layer. 
+
+
+
+ReLu. rectified linear unit. <img src="images/coursera-deep-learning/image-20200825091816970.png" alt="image-20200825091816970" style="zoom:33%;" />
+
+Leaky ReLu <img src="images/coursera-deep-learning/image-20200825092035097.png" alt="image-20200825092035097" style="zoom:33%;" />
+
+Rules: 
+
+* if output layer needs to be 0/1 use sigmoid 
+* for inner layers just use relu. 
+
+### 3.3.6 Why do you need non-linear activation function 
+
+what happens if we remove sigmoid/activation function ... a breaks down to a linear combination of W,x,b 
+
+### 3.3.7 Derivatives of activation functions 
+
+derivative of sigmoid <img src="images/coursera-deep-learning/image-20200825092745099.png" alt="image-20200825092745099" style="zoom:33%;" />
+
+derivative of tanh <img src="images/coursera-deep-learning/image-20200825092825810.png" alt="image-20200825092825810" style="zoom:33%;" />
+
+derivative of relu <img src="images/coursera-deep-learning/image-20200825092904654.png" alt="image-20200825092904654" style="zoom:33%;" />
+
+### 3.3.8 Gradient descent for neural networks 
+
+formula heavy slide 
+
+![image-20200825094204314](images/coursera-deep-learning/image-20200825094204314.png)
+
+skipping the intuition video .. 
+
+### 3.3.9 Random initialization 
+
+* initializing bias to zero is okay but NOT okay for w. 
+* w =0 , a1 = a2. dz1 = dz2. nodes are completely symmetric. 
+* basically, all hidden units will compute the same function. no matter how long you nothing will change. 
+
+<img src="images/coursera-deep-learning/image-20200825094512975.png" alt="image-20200825094512975" style="zoom:50%;" />
+
+Correct way to do it : <img src="images/coursera-deep-learning/image-20200825094636701.png" alt="image-20200825094636701" style="zoom:33%;" />
+
+* multiply by 0.001 -> makes w very small -> makes z small -> slope of gradient large. 
+* if w large -> z large -> slope will be small -> learning will slow down. <img src="images/coursera-deep-learning/image-20200825094750887.png" alt="image-20200825094750887" style="zoom:25%;" />
