@@ -398,3 +398,69 @@ Correct way to do it : <img src="images/coursera-deep-learning/image-20200825094
 
 * multiply by 0.001 -> makes w very small -> makes z small -> slope of gradient large. 
 * if w large -> z large -> slope will be small -> learning will slow down. <img src="images/coursera-deep-learning/image-20200825094750887.png" alt="image-20200825094750887" style="zoom:25%;" />
+
+
+
+# Week 4 
+
+## 4.2 Forward propagation in deep network
+
+![image-20200829133305016](images/coursera-deep-learning/image-20200829133305016.png)
+
+explicit for loop for layers cant be removed. 
+
+## 4.3 Getting your matrix dimensions right
+
+ 
+
+dimensions of w^1 = (n^1 , n^0)
+
+generally w^L = (n^L, n^(L-1) )
+
+dimensions of b^L = (n^L, 1)
+
+<img src="images/coursera-deep-learning/image-20200829134031119.png" alt="image-20200829134031119" style="zoom:50%;" />
+
+non-vectorized: 
+
+![image-20200829134119466](images/coursera-deep-learning/image-20200829134119466.png)
+
+vectorized: stack the m examples on top of each other. b will be (n^1,1) but through python broadcasting it will be duplicated to n1, m
+
+![image-20200829134220862](images/coursera-deep-learning/image-20200829134220862.png)
+
+## 4.4 Why deep representations 
+
+* each layer detects a different aspect of the image 
+* eg. layer 1 : edges vertical, horizontal. layer 2: eyes, mouth, layer 3: faces
+
+![image-20200829134505869](images/coursera-deep-learning/image-20200829134505869.png)
+
+* audio. layer 1: low level waveform. layer 2: basic units of sound phonemes. layer 3: words layer 4: sentences 
+* early layer "simple" , deeper layer "complex" functions
+
+
+
+**Circuit theory** and deep learning 
+
+* there are functions you can compute with a small L layer deep network that shallower network requires exponentially hidden units to compute
+
+![image-20200829134926601](images/coursera-deep-learning/image-20200829134926601.png)
+
+## 4.5 Building blocks of deep neural networks 
+
+<img src="images/coursera-deep-learning/image-20200829135213404.png" alt="image-20200829135213404" style="zoom:33%;" />
+
+
+
+<img src="images/coursera-deep-learning/image-20200829135247822.png" alt="image-20200829135247822" style="zoom:50%;" />
+
+## 4.6 Forward and backward propagation 
+
+![image-20200829135734236](images/coursera-deep-learning/image-20200829135734236.png)
+
+## 4.7 Parameters vs hyper parameters 
+
+Parameters: W, b 
+
+Hyperparameters: learning rate, iteration, hidden layer, activation function , momentum, batch size, regularization 
